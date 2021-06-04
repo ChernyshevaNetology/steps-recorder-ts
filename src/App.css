@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,300&display=swap');
+
+.input {
+  width: 140px;
+  height: 40px;
+  text-align: center;
+  border-radius: 5px;
+  outline: 0;
+  border: 1px solid #222;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  padding-left: 10px;
+}
+
+.edit,
+.remove-btn {
+  cursor: pointer;
+}
+
+.remove-btn {
+  color: tomato;
+}
+
+.edit {
+  color: #777;
+}
+
+input:focus::-webkit-input-placeholder{
+  color: transparent!important;
+}
+input:focus::-moz-placeholder{
+  color: transparent!important;
+}
+input:focus:-moz-placeholder{
+  color: transparent!important;
+}
