@@ -4,7 +4,7 @@ import { TableData } from "../types";
 
 type TableRowProps = {
   date: string;
-  steps: string;
+  steps: number;
   onDelete: (id: string) => void;
   id: string;
   setTableData: (data: TableData[]) => void;

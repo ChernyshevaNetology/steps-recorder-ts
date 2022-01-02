@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 type InputProps = {
-  steps: string;
+  steps: number;
   onInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 

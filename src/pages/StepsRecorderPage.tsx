@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
-import DataPicker from "../components/DataPicker";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import Table from "../components/Table";
+import DataPicker from "components/DataPicker";
+import Button from "components/Button";
+import Input from "components/Input";
+import Table from "components/Table";
 import styled from "styled-components";
 import { TableData } from "../types";
 import { nanoid } from "nanoid";
@@ -24,22 +24,22 @@ const FormWrapper = styled.form`
 
 const StepsRecorderPage: FC = () => {
   const [date, setDate] = useState<string>("");
-  const [steps, setSteps] = useState<string>("");
-  const [tableData, setTableData] = useState([
+  const [steps, setSteps] = useState<number>(0);
+  const [tableData, setTableData] = useState<TableData[]>([
     {
       id: '0',
       date: "2019-08-20",
-      steps: '14',
+      steps: 14,
     },
     {
       id: '1',
       date: "2020-07-19",
-      steps: '9',
+      steps: 9,
     },
     {
       id: '2',
       date: "2006-06-18",
-      steps: '8',
+      steps: 8,
     },
   ]);
   const handleTableData = (newData: TableData[]) => {
@@ -51,18 +51,18 @@ const StepsRecorderPage: FC = () => {
 
   const handleSubmit = () => {
     setDate("");
-    setSteps("");
+    setSteps(0);
     if (!date || !steps) {
       return;
     }
     if (hasDate(tableData, date)) {
-      const newData = tableData.reduce((acc: TableData[], curr: any) => {
+      const newData = tableData.reduce<TableData[]>((acc , curr ) => {
         if (curr.date === date) {
           return [
             ...acc,
             {
               ...curr,
-              steps: parseInt(curr.steps) + parseInt(steps),
+              steps: curr.steps + steps,
             },
           ];
         }
@@ -80,10 +80,6 @@ const StepsRecorderPage: FC = () => {
     ]);
   };
 
-  const handleStepsChange = (value: React.SetStateAction<string>) => {
-    setSteps(value);
-  };
-
   const handleDelete = (id: string): void => {
     const newData = tableData.filter((entry) => entry.id !== id);
     setTableData(newData);
@@ -98,7 +94,7 @@ const StepsRecorderPage: FC = () => {
   const handleStepsInput = ({
     currentTarget: { value },
   }: React.FormEvent<HTMLInputElement>): void => {
-    setSteps(value);
+    setSteps(parseInt(value));
   };
 
 
@@ -117,7 +113,6 @@ const StepsRecorderPage: FC = () => {
         date={date}
         steps={steps}
         data={tableData}
-        onInput={handleStepsChange}
         onDelete={handleDelete}
         setTableData={handleTableData}
       />

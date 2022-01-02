@@ -37,11 +37,10 @@ const RowStyles = styled.div`
 `;
 
 type TableProps = {
-  date?: string;
-  steps: string;
+  date: string;
+  steps: number;
   data: TableData[];
   onDelete: (id: string) => void;
-  onInput: (value: React.SetStateAction<string>) => void;
   setTableData: (data: TableData[]) => void;
 };
 
@@ -49,7 +48,6 @@ const Table: FC<TableProps> = ({
   date,
   data,
   onDelete,
-  onInput,
   setTableData,
 }) => {
   const sortedData = data.sort(
