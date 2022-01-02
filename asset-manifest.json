@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/steps-recorder/static/css/main.4c975c0f.chunk.css",
+    "main.js": "/steps-recorder/static/js/main.b188820a.chunk.js",
+    "main.js.map": "/steps-recorder/static/js/main.b188820a.chunk.js.map",
+    "runtime-main.js": "/steps-recorder/static/js/runtime-main.5895597c.js",
+    "runtime-main.js.map": "/steps-recorder/static/js/runtime-main.5895597c.js.map",
+    "static/js/2.9c710e4a.chunk.js": "/steps-recorder/static/js/2.9c710e4a.chunk.js",
+    "static/js/2.9c710e4a.chunk.js.map": "/steps-recorder/static/js/2.9c710e4a.chunk.js.map",
+    "index.html": "/steps-recorder/index.html",
+    "static/css/main.4c975c0f.chunk.css.map": "/steps-recorder/static/css/main.4c975c0f.chunk.css.map",
+    "static/js/2.9c710e4a.chunk.js.LICENSE.txt": "/steps-recorder/static/js/2.9c710e4a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5895597c.js",
+    "static/js/2.9c710e4a.chunk.js",
+    "static/css/main.4c975c0f.chunk.css",
+    "static/js/main.b188820a.chunk.js"
+  ]
+}
