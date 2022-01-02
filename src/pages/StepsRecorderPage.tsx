@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import DataPicker from "../components/DataPicker";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Table from "../components/Table";
 import styled from "styled-components";
+import { TableData } from "../types";
 import { nanoid } from "nanoid";
 
 const Container = styled.div`
@@ -21,35 +22,41 @@ const FormWrapper = styled.form`
   margin: auto;
 `;
 
-const StepsRecorderPage = () => {
-  const [date, setDate] = useState("");
-  const [steps, setSteps] = useState("");
+const StepsRecorderPage: FC = () => {
+  const [date, setDate] = useState<string>("");
+  const [steps, setSteps] = useState<string>("");
   const [tableData, setTableData] = useState([
     {
-      id: 0,
+      id: '0',
       date: "2019-08-20",
-      steps: 14,
+      steps: '14',
     },
     {
-      id: 1,
+      id: '1',
       date: "2020-07-19",
-      steps: 9,
+      steps: '9',
     },
     {
-      id: 2,
+      id: '2',
       date: "2006-06-18",
-      steps: 8,
+      steps: '8',
     },
   ]);
+  const handleTableData = (newData: TableData[]) => {
+     setTableData(newData);
+  }
 
-  const hasDate = (data, date) => data.find((item) => item.date === date);
+  const hasDate = (data: TableData[], date: string) =>
+    data.find((item: TableData) => item.date === date);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     setDate("");
     setSteps("");
+    if (!date || !steps) {
+      return;
+    }
     if (hasDate(tableData, date)) {
-      const newData = tableData.reduce((acc, curr) => {
+      const newData = tableData.reduce((acc: TableData[], curr: any) => {
         if (curr.date === date) {
           return [
             ...acc,
@@ -67,28 +74,33 @@ const StepsRecorderPage = () => {
       ...tableData,
       {
         id: nanoid(),
-        date: date,
-        steps: steps,
+        date,
+        steps,
       },
     ]);
   };
 
-  const handleStepsChange = (value) => {
+  const handleStepsChange = (value: React.SetStateAction<string>) => {
     setSteps(value);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string): void => {
     const newData = tableData.filter((entry) => entry.id !== id);
     setTableData(newData);
   };
 
-  const handleDateInput = ({ target: { value } }) => {
+  const handleDateInput = ({
+    currentTarget: { value },
+  }: React.FormEvent<HTMLInputElement>): void => {
     setDate(value);
   };
 
-  const handleStepsInput = ({ target: { value } }) => {
+  const handleStepsInput = ({
+    currentTarget: { value },
+  }: React.FormEvent<HTMLInputElement>): void => {
     setSteps(value);
   };
+
 
   return (
     <Container>
@@ -99,7 +111,7 @@ const StepsRecorderPage = () => {
         <label htmlFor="hours">
           <Input steps={steps} onInput={handleStepsInput} />
         </label>
-        <Button value={"ADD"} />
+        <Button value={"ADD"} onSubmit={handleSubmit} />
       </FormWrapper>
       <Table
         date={date}
@@ -107,7 +119,7 @@ const StepsRecorderPage = () => {
         data={tableData}
         onInput={handleStepsChange}
         onDelete={handleDelete}
-        setTableData={setTableData}
+        setTableData={handleTableData}
       />
     </Container>
   );

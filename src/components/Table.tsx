@@ -1,7 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 import TableRow from "./TableRow";
 import { formatDate } from "../common/helpers";
+import { TableData } from "../types";
 
 const TableStyles = styled.div`
   max-width: 400px;
@@ -35,7 +36,22 @@ const RowStyles = styled.div`
   }
 `;
 
-const Table = ({ data, onDelete, handleStepsChange, setTableData }) => {
+type TableProps = {
+  date?: string;
+  steps: string;
+  data: TableData[];
+  onDelete: (id: string) => void;
+  onInput: (value: React.SetStateAction<string>) => void;
+  setTableData: (data: TableData[]) => void;
+};
+
+const Table: FC<TableProps> = ({
+  date,
+  data,
+  onDelete,
+  onInput,
+  setTableData,
+}) => {
   const sortedData = data.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
@@ -49,7 +65,6 @@ const Table = ({ data, onDelete, handleStepsChange, setTableData }) => {
             date={formatDate(date)}
             steps={steps}
             onDelete={onDelete}
-            onInput={handleStepsChange}
             setTableData={setTableData}
             data={data}
           />

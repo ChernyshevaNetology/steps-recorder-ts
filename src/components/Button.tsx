@@ -1,5 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
+
+type ButtonProps = {
+  onSubmit: (event: React.MouseEvent<HTMLButtonElement> ) => void;
+  value: string;
+};
 
 const Btn = styled.button`
   width: 80px;
@@ -19,8 +24,8 @@ const Btn = styled.button`
   }
 `;
 
-const Button = ({ onSubmit, value }) => {
-  return <Btn onClick={onSubmit}>{value}</Btn>;
+const Button: FC<ButtonProps> = ({ onSubmit, value }) => {
+  return <Btn type='button' onClick={onSubmit}>{value}</Btn>;
 };
 
 export default Button;

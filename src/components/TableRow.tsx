@@ -1,24 +1,44 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { formatDate } from "../common/helpers";
+import { TableData } from "../types";
 
-const TableRow = ({ date, steps, onDelete, id, setTableData, data }) => {
-  console.log(date, steps, id);
+type TableRowProps = {
+  date: string;
+  steps: string;
+  onDelete: (id: string) => void;
+  id: string;
+  setTableData: (data: TableData[]) => void;
+  data: TableData[];
+};
 
+const TableRow: FC<TableRowProps> = ({
+  date,
+  steps,
+  onDelete,
+  id,
+  setTableData,
+  data,
+}) => {
   const [edit, setEdit] = useState(false);
   const [editSteps, setEditSteps] = useState(steps);
   const [editDate, setEditDate] = useState(formatDate(date));
 
-  const handleEditChange = ({ target: { value } }) => {
+  const handleEditChange = ({
+    currentTarget: { value },
+  }: React.FormEvent<HTMLInputElement>): void => {
+    // @ts-ignore
     setEditSteps(value);
   };
 
-  const handleDateChange = ({ target: { value } }) => {
+  const handleDateChange = ({
+    currentTarget: { value },
+  }: React.FormEvent<HTMLInputElement>): void => {
     setEditDate(value);
   };
 
   const handleEdit = () => setEdit(!edit);
 
-  const handleEditSubmit = (id) => {
+  const handleEditSubmit = (id: string) => {
     const editedData = data.map((item) => {
       if (item.id === id) {
         return {
